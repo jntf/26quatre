@@ -1,16 +1,18 @@
 ---
 import HeroSection from "../HeroSection.vue";
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
 import Banner from "../../assets/banner3.png";
 ---
 
 <HeroSection>
-    <Image src={Banner} alt="Banner" 
-       class="w-full h-[60vh] md:h-[90vh] object-cover"
-       width={1200}
-       height={600}
-       decoding="async"
-       loading="eager"
-       format="webp"
-       />
+    <Image
+        src={Banner}
+        alt="Banner"
+        class="w-full h-[60vh] md:h-[90vh] object-cover"
+        widths={[320, 480, 768, 1200]}
+        sizes="(max-width: 768px) 100vw, 1200px"
+        decoding="async"
+        loading="eager"
+        format="webp"
+    />
 </HeroSection>
