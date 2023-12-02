@@ -3,7 +3,8 @@
         <nav class="px-4 lg:px-6 sticky top-0 z-50">
             <div class="py-1 flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
                 <!-- logo -->
-                <img :class="{ 'invert': scrolled }" :src="logo.src" alt="<26·quatre />" width="150" height="150" loading="lazy">
+                <!-- <img :src="logo.src" alt="<26·quatre />" width="150" height="150" loading="lay"> -->
+                <slot  :class="{ 'invert': scrolled }"></slot>
                 <!-- Mobile -->
                 <div class="flex items-center lg:order-2">
                     <button data-collapse-toggle="mobile-menu-2" type="button"

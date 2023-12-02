@@ -1,0 +1,16 @@
+---
+import Header from "./Header.vue";
+import { Image } from "astro:assets";
+import Logo from "../../assets/logo-26.quatre.png";
+---
+
+<Header>
+    <Image
+        src={Logo}
+        alt="Banner"
+        width="150"
+        height="150"
+        loading="lazy"
+        format="webp"
+    />
+</Header>
