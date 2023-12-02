@@ -1,0 +1,57 @@
+---
+import { Image } from 'astro:assets';
+import Logo from '../../assets/logo-26.quatre.png';
+
+const pageLinks = [
+    { category: 'Services', items: ['Service 1', 'Service 2', 'Service 3'] },
+    { category: 'Ressources', items: ['Blog', 'FAQ', 'Support'] },
+    // Add more categories and links as needed
+]
+
+const address =  {
+    street: '123 Rue Exemple',
+    city: 'Ville',
+    zip: '75000',
+    country: 'Pays'
+}
+---
+
+<footer class="bg-dark text-white p-6">
+    <div class="container mx-auto flex flex-col md:flex-row items-center justify-between">
+        <div class="mb-6 md:mb-0">
+            <Image src={Logo} 
+                alt="Logo"
+                width="240"
+                height="60"
+            />
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <!-- <div v-for="link in pageLinks" :key="link.text" class="mb-4 md:mb-0">
+                <h5 class="font-semibold text-lg mb-2">{ link.category }</h5>
+                <ul>
+                    <li v-for="item in link.items" :key="item" class="text-sm">
+                        <a href="#" class="hover:text-primary-500">{ item }</a>
+                    </li>
+                </ul>
+            </div> -->
+            {pageLinks.map(link => (
+                <div class="mb-4 md:mb-0">
+                    <h5 class="font-semibold text-lg mb-2">{ link.category }</h5>
+                    <ul>
+                        {link.items.map(item => (
+                            <li class="text-sm">
+                                <a href="#" class="hover:text-primary-500">{ item }</a>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            ))}
+            <div class="col-span-2 md:col-span-1">
+                <h5 class="font-semibold text-lg mb-2">Adresse</h5>
+                <p class="text-sm">{ address.street }</p>
+                <p class="text-sm">{ address.city }, { address.zip }</p>
+                <p class="text-sm">{ address.country }</p>
+            </div>
+        </div>
+    </div>
+</footer>

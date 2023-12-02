@@ -1,0 +1,29 @@
+---
+// Importez votre composant Vue
+import Header from "../components/common/Header.vue"
+import Footer from "../components/common/Footer.astro";
+import HeroSection from "../components/HeroSection.vue";
+import ServicesSection from "../components/ServicesSection.astro";
+---
+
+<html>
+	<head>
+		<title>Ma première page avec Astro + Vue</title>
+		<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+	</head>
+	<body>
+		<div
+			class="bg-gradient-to-br from-primary-800 via-primary-900 to-primary-950 min-h-screen"
+		>
+			<!-- Utilisez votre composant Astro ici -->
+			<Header client:load />
+			<HeroSection client:load />
+			<ServicesSection />
+			<Footer />
+		</div>
+		<script is:inline src="https://unpkg.com/aos@next/dist/aos.js"></script>
+		<script is:inline>
+			AOS.init();
+		</script>
+	</body>
+</html>

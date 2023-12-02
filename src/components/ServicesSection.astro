@@ -1,0 +1,44 @@
+---
+interface Service {
+    title: string;
+    text: string;
+    svg: string;
+}
+
+const services: Service[] = [
+    { title: 'Data Analyste', text: 'Le data analyste est un professionnel de la donnée. Il collecte, traite et analyse les données d’une entreprise afin de les rendre exploitables par les décideurs.', svg: 'analyst' },
+    { title: 'Data Engineer', text: 'Le data engineer est un professionnel de la donnée. Il collecte, traite et analyse les données d’une entreprise afin de les rendre exploitables par les décideurs.', svg: 'engineer' },
+    { title: 'Cloud Computing', text: 'Le Cloud Computing est un modèle qui permet d’accéder à des ressources informatiques à la demande via un réseau, généralement Internet.', svg: 'cloud' },
+    { title: 'Scraping', text: 'Le scraping est une technique qui consiste à extraire des données d’un site web pour les copier dans une base de données ou une feuille de calcul.', svg: 'scraping' },
+    { title: 'SEO Technique', text: 'Le SEO technique est un ensemble de techniques visant à optimiser la structure et le contenu d’un site web pour le rendre plus performant sur les moteurs de recherche.', svg: 'seo' },
+    { title: 'SPA ou Single Page Application', text: 'Une application web monopage est une application web accessible via une page web unique, qui se charge dynamiquement avec des données.', svg: 'spa' },
+]
+---
+<section id="services">
+    <div class="bg-white min-h-screen flex flex-col">
+        <div class="container mx-auto py-6 flex-1 flex flex-col justify-center">
+            <!-- Titre -->
+            <div class="text-center mb-8 md:mb-16 xl:mb-24">
+                <h3 class="text-3xl text-complementary-300 font-semibold uppercase">Les services que nous offrons</h3>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 grab-4 md:gap-8 mx-4 md:mx-24">
+                {services.map(service => (
+                    <div class="bg-white rounded-xl shadow-lg shadow-primary-400 p-4 flex flex-col items-start justify-between h-full"
+                        data-aos="zoom-out" data-aos-duration="1000">
+                        <div class="flex items-center">
+                            <div class="svg-container mr-2">
+                                <img src={`/svg/${service.svg}.svg`} alt={service.title}
+                                    class="bg-purple-500 text-white rounded-lg shadow-md" />
+                            </div>
+                            <h4 class="text-xl font-bold">{ service.title }</h4>
+                        </div>
+                        <p class="pt-2">{ service.text }</p>
+                        <a class="text-center w-full px-4 py-2 mt-3 mb-1 bg-primary-500 text-white rounded hover:bg-primary-600">
+                            En savoir plus
+                        </a>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </div>
+</section>
