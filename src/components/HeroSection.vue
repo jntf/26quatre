@@ -1,7 +1,8 @@
 <template>
     <div class="relative md:min-h-screen -mt-12">
         <div class="w-full mx-auto">
-            <img src="../assets/banner3.png" alt="banner" class="w-full h-[60vh] md:h-[90vh] object-cover">
+            <!-- <img src="../assets/banner3.png" alt="banner" class="w-full h-[60vh] md:h-[90vh] object-cover"> -->
+            <img :src="banner.src" alt="banner" class="w-full h-[60vh] md:h-[90vh] object-cover">
         </div>
 
         <div class="absolute top-20 left-5 md:w-1/3 h-[50vh] md:h-[90vh] flex flex-col items-center justify-center">
@@ -23,6 +24,10 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
+
+const props = defineProps({
+    banner: Object,
+})
 
 interface WordEntry {
     text: string;

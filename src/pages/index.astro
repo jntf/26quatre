@@ -4,6 +4,9 @@ import Header from "../components/common/Header.vue"
 import Footer from "../components/common/Footer.astro";
 import HeroSection from "../components/HeroSection.vue";
 import ServicesSection from "../components/ServicesSection.astro";
+import { Image } from 'astro:assets';
+import Logo from '../assets/logo-26.quatre.png';
+import Banner from '../assets/banner3.png';
 ---
 
 <html>
@@ -15,11 +18,12 @@ import ServicesSection from "../components/ServicesSection.astro";
 		<div
 			class="bg-gradient-to-br from-primary-800 via-primary-900 to-primary-950 min-h-screen"
 		>
-			<!-- Utilisez votre composant Astro ici -->
-			<Header client:load />
-			<HeroSection client:load />
+			<Header client:load logo={Logo} />
+			<HeroSection client:load banner={Banner} />
 			<ServicesSection />
-			<Footer />
+			<Footer>
+				<Image src={Logo} alt="Logo" width="240" height="60"/>
+			</Footer>
 		</div>
 		<script is:inline src="https://unpkg.com/aos@next/dist/aos.js"></script>
 		<script is:inline>

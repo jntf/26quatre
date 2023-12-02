@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+
 interface Service {
     title: string;
     text: string;
@@ -27,8 +29,7 @@ const services: Service[] = [
                         data-aos="zoom-out" data-aos-duration="1000">
                         <div class="flex items-center">
                             <div class="svg-container mr-2">
-                                <img src={`/svg/${service.svg}.svg`} alt={service.title}
-                                    class="bg-purple-500 text-white rounded-lg shadow-md" />
+                                <Image src={'/svg/' + service.svg + '.svg'} alt="A description of my image." width="50" height="50" class="bg-purple-500 text-white rounded-lg shadow-md"/>
                             </div>
                             <h4 class="text-xl font-bold">{ service.title }</h4>
                         </div>
