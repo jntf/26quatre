@@ -4,7 +4,7 @@ import { Image } from "astro:assets";
 import Banner from "../../assets/banner3.png";
 ---
 
-<HeroSection>
+<HeroSection client:load>
     <Image
         src={Banner}
         alt="Banner"
