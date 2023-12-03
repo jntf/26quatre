@@ -12,7 +12,7 @@ const serv = services.services;
                 <h3 class="text-3xl text-complementary-300 font-semibold uppercase">Les services que nous offrons</h3>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 grab-4 md:gap-8 mx-4 md:mx-24">
-                {serv.map(service => (
+                {serv.map((service: { slug: string, title: string, shortDescription: string }) => (
                     <div class="bg-white rounded-xl shadow-lg shadow-primary-400 p-4 flex flex-col items-start justify-between h-full"
                         data-aos="zoom-out" data-aos-duration="1000">
                         <div class="flex items-center">
