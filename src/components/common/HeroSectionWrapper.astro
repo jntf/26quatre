@@ -2,9 +2,11 @@
 import HeroSection from "../HeroSection.vue";
 import { Image } from "astro:assets";
 import Banner from "../../assets/banner3.png";
+
+const { services } = Astro.props;
 ---
 
-<HeroSection client:load>
+<HeroSection client:load services={services}>
     <Image
         src={Banner}
         alt="Banner"

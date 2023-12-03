@@ -2,16 +2,43 @@
 // Importez votre composant Vue
 import Header from "../components/common/Header.vue"
 import Footer from "../components/common/Footer.astro";
-import ServicesSection from "../components/ServicesSection.astro";
 import HeroSection from "../components/common/HeroSectionWrapper.astro";
+import ServicesSection from "../components/ServicesSection.astro";
 import { Image } from 'astro:assets';
 import Logo from '../assets/logo-26.quatre.webp';
-import Banner from '../assets/banner3.png';
+
+interface Service {
+  title: string;
+  slug: string;
+  shortDescription: string;
+}
+
+const query = {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    query: `
+      {
+        services {
+			title
+			slug
+			shortDescription
+			firstPageColor {
+				hex
+			}
+		}
+      }`,
+  }),
+};
+
+const response = await fetch(import.meta.env.HYGRAPH_ENDPOINT, query);
+const json = await response.json();
+const services: Service[] = json.data;
 ---
 
 <html lang="fr">
 	<head>
-		<title>Ma première page avec Astro + Vue</title>
+		<title>26quatre - Services Data</title>
 		<meta name="viewport" content="width=device-width" />
 		<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 	</head>
@@ -20,8 +47,8 @@ import Banner from '../assets/banner3.png';
 			class="bg-gradient-to-br from-primary-800 via-primary-900 to-primary-950 min-h-screen"
 		>
 			<Header client:load logo={Logo} />
-			<HeroSection />
-			<ServicesSection />
+			<HeroSection services={services}/>
+			<ServicesSection services={services}/>
 			<Footer>
 				<Image src={Logo} alt="Logo" width="240" height="60"/>
 			</Footer>

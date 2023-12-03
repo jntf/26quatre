@@ -1,15 +1,15 @@
 <template>
     <div class="relative md:min-h-screen -mt-12">
         <div class="w-full mx-auto">
-            <!-- <img src="../assets/banner3.png" alt="banner" class="w-full h-[60vh] md:h-[90vh] object-cover"> -->
             <slot></slot>
         </div>
 
         <div class="absolute top-20 left-5 md:w-1/3 h-[50vh] md:h-[90vh] flex flex-col items-center justify-center">
-            <div :class="`${currentWord.color} text-3xl md:text-5xl font-bold animate-move pb-8`">
-                {{ currentWord.text }}
+            <div class="text-3xl md:text-5xl font-bold animate-move pb-8" :style="`color:${currentService.firstPageColor.hex}`">
+                {{ currentService.title }}
             </div>
-            <h2 class="text-4xl md:text-6xl font-bold text-center text-white" data-aos="fade-right" data-aos-duration="1000">
+            <h2 class="text-4xl md:text-6xl font-bold text-center text-white" data-aos="fade-right"
+                data-aos-duration="1000">
                 Tout ce que vous devez savoir sur la Data Science
             </h2>
             <a href="#"
@@ -26,31 +26,21 @@
 import { ref, onMounted } from 'vue';
 
 const props = defineProps({
-    banner: Object,
-})
+    services: Object
+}) 
 
-interface WordEntry {
-    text: string;
-    color: string;
-}
+const services = ref(props.services);
 
-const words: WordEntry[] = [
-    { text: 'Data Engineer', color: 'text-complementary-200' },
-    { text: 'Data Analyst', color: 'text-como-400' },
-    { text: 'SEO', color: 'text-yellow-700' },
-    { text: 'Web Optimisation', color: 'text-green-700' },
-];
+const currentService = ref(services.value.services[0]);
+let serviceIndex = 0;
 
-const currentWord = ref(words[0]);
-let wordIndex = 0;
-
-const changeWord = () => {
-    wordIndex = (wordIndex + 1) % words.length;
-    currentWord.value = words[wordIndex];
+const changeService = () => {
+    serviceIndex = (serviceIndex + 1) % services.value.services.length;
+    currentService.value = services.value.services[serviceIndex];
 };
 
 onMounted(() => {
-    setInterval(changeWord, 2920);
+    setInterval(changeService, 2920);
 });
 </script>
 
