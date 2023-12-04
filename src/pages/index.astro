@@ -7,33 +7,9 @@ import ServicesSection from "../components/ServicesSection.astro";
 import { Image } from 'astro:assets';
 import Logo from '../assets/logo-26.quatre.webp';
 
-interface Service {
-  title: string;
-  slug: string;
-  shortDescription: string;
-}
+import { fetchServices } from '../stores/servicesStore.js';
 
-const query = {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({
-    query: `
-      {
-        services {
-			title
-			slug
-			shortDescription
-			firstPageColor {
-				hex
-			}
-		}
-      }`,
-  }),
-};
-
-const response = await fetch(import.meta.env.HYGRAPH_ENDPOINT, query);
-const json = await response.json();
-const services: Service[] = json.data;
+const services = await fetchServices();
 ---
 
 <html lang="fr">

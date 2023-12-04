@@ -27,7 +27,7 @@
                 <div class="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
                     <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
                         <li v-for="link in links" :key="link.name" class="relative">
-                            <a :href="link.url" class="px-3 py-2 flex items-center justify-center hover:text-yellow-400">
+                            <a :href="'/' + link.url" class="px-3 py-2 flex items-center justify-center hover:text-yellow-400">
                                 {{ link.name }}
                             </a>
                         </li>
@@ -69,18 +69,6 @@ const links: any = [
         name: 'Services',
         url: '#services'
     },
-    {
-        name: 'Features',
-        url: '#'
-    },
-    {
-        name: 'Team',
-        url: '#'
-    },
-    {
-        name: 'Contact',
-        url: '#'
-    }
 ]
 </script>
 
