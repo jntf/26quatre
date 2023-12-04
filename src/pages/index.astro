@@ -49,7 +49,7 @@ const services: Service[] = json.data;
 			<Header client:load logo={Logo} />
 			<HeroSection services={services}/>
 			<ServicesSection services={services}/>
-			<Footer>
+			<Footer services={services}>
 				<Image src={Logo} alt="Logo" width="240" height="60"/>
 			</Footer>
 		</div>
