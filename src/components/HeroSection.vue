@@ -8,10 +8,10 @@
             <div class="text-3xl md:text-5xl font-bold animate-move pb-8" :style="`color:${currentService.firstPageColor.hex}`">
                 {{ currentService.title }}
             </div>
-            <h2 class="text-4xl md:text-6xl font-bold text-center text-white" data-aos="fade-right"
+            <h1 class="text-2xl md:text-4xl font-bold text-center text-white" data-aos="fade-right"
                 data-aos-duration="1000">
-                Tout ce que vous devez savoir sur la Data Science
-            </h2>
+                Révolutionner les Stratégies d'Entreprise avec des Techniques Avancées de Data et SEO.
+            </h1>
             <a href="#"
                 class="text-primary-200 mt-8 px-3 py-2 rounded-xl bg-gradient-to-br from-primary-800 via-primary-900 to-primary-950 hover:hover:from-primary-700 hover:to-primary-600 w-32 h-10 flex items-center justify-center animate-pulse"
                 style="box-shadow: -3px -3px 3px -3px #B9C3A9, 2px 2px 5px 3px #000;">
