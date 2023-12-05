@@ -45,9 +45,7 @@ const dynamicImport = async (slug: String) => {
   if (slug) {
     return import(`../../assets/services/${slug}.webp`);
   } else {
-    return import(
-      "https://unsplash.com/fr/photos/un-chemin-enneige-dans-une-foret-enneigee-6HLFk334hYY"
-    );
+    return null;
   }
 };
 ---
