@@ -33,15 +33,18 @@ const services: Service[] = await fetchServices();
 
 export async function getStaticPaths() {
   const services: Service[] = await fetchServices().then((res) => res.services);
-  return services.map(({ slug, title, longTitle, shortDescription, pageDescriptive, image }) => {
-    return {
-      params: { slug },
-      props: { title, longTitle, shortDescription, pageDescriptive, image },
-    };
-  });
+  return services.map(
+    ({ slug, title, longTitle, shortDescription, pageDescriptive, image }) => {
+      return {
+        params: { slug },
+        props: { title, longTitle, shortDescription, pageDescriptive, image },
+      };
+    },
+  );
 }
 
-const { title, longTitle, shortDescription, pageDescriptive, image } = Astro.props;
+const { title, longTitle, shortDescription, pageDescriptive, image } =
+  Astro.props;
 const { slug } = Astro.params;
 const dynamicImport = async (slug: String) => {
   if (slug) {
@@ -57,10 +60,7 @@ const dynamicImport = async (slug: String) => {
     <title>{title}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <Seo
-      title={title}
-      description={shortDescription}
-    />
+    <Seo title={title} description={shortDescription} />
     <Schema
       item={{
         "@context": "https://schema.org",
@@ -69,14 +69,15 @@ const dynamicImport = async (slug: String) => {
         provider: {
           "@type": "Organization",
           name: "26quatre",
-          location: "Bayonne, Biarritz, Anglet, Sud-Ouest France, 64, 40, Landes et Pyrénées-Atlantiques, Nouvelle-Aquitaine",
+          location:
+            "Bayonne, Biarritz, Anglet, Sud-Ouest France, 64, 40, Landes et Pyrénées-Atlantiques, Nouvelle-Aquitaine",
         },
         description:
           "Services experts d'analyse de données pour transformer les données brutes en informations précieuses pour la prise de décision. Spécialisés dans l'analyse du comportement des clients, le développement de stratégies de marché et l'amélioration de l'expérience des clients.",
         areaServed: ["Biarritz", "Bayonne", "Anglet"],
-        serviceType: {title},
+        serviceType: "Analyse des données",
         offers: {
-          "@type": "Offre",
+          "@type": "Offer",
           description:
             "Une analyse complète des données pour des décisions commerciales éclairées, adaptée aux entreprises locales et aux startups du Sud-Ouest de la France.",
         },
