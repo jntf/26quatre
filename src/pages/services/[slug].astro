@@ -1,16 +1,26 @@
 ---
 import Header from "../../components/common/Header.vue"
 import Footer from "../../components/common/Footer.astro";
+import Prose from "../../components/services/Prose.astro";
 import { Image } from 'astro:assets';
 import Logo from '../../assets/logo-26.quatre.webp';
 import { fetchServices } from '../../stores/servicesStore.js';
+
 
 interface Service {
   title: string;
   longTitle: string;
   slug: string;
-  description: {
-    html: string;
+  pageDescriptive: {
+    introduction: {
+      html: String;
+    }
+    corps: {
+      html: String;
+    }
+    conclusion: {
+      html: String;
+    }
   };
   image: {
     url: string;
@@ -20,15 +30,15 @@ const services: Service[] = await fetchServices();
 
 export async function getStaticPaths() {
   const services: Service[] = await fetchServices().then((res) => res.services);
-  return services.map(({ slug, title, longTitle, description, image }) => {
+  return services.map(({ slug, title, longTitle, pageDescriptive, image }) => {
     return {
       params: { slug },
-      props: { title,longTitle,  description, image },
+      props: { title,longTitle,  pageDescriptive, image },
     };
   });
 }
 
-const { title, longTitle, description, image } = Astro.props;
+const { title, longTitle, pageDescriptive, image } = Astro.props;
 ---
 <html lang="fr">
 	<head>
@@ -42,14 +52,14 @@ const { title, longTitle, description, image } = Astro.props;
 		>
 			<Header client:load logo={Logo} />
       <body>
-        <div class="bg-white flex flex-col items-center justify-between min-h-screen">
+        <div class="bg-white min-h-screen">
           <!-- image picture -->
           <div class="w-full md:h-[60vh]">
             <img src={image ? image.url: 'https://unsplash.com/fr/photos/un-chemin-enneige-dans-une-foret-enneigee-6HLFk334hYY'} alt="image" class="w-full h-full object-cover" loading="lazy" />
           </div>
-          <h3 class="text-3xl text-gray-700 capitalize">{longTitle}</h3>
-          <div class="w-5/6 md:w-3/4 lg:w-2/3 xl::w-1/2 bg-purple-50 rounded-md shadow-lg p-4 mt-4 mb-12"  data-aos="zoom-out" data-aos-duration="1000">
-            <p set:html={ description ? description.html: '<div>No data</div>'} class="text-center"></p>
+          <div class="max-w-7xl mx-auto bg-white py-12 px-12 lg:px-24 md:-mt-32 relative z-10 rounded-md shadow-md">
+            <h1 class="font-display text-center text-2xl md:text-3xl text-gray-900 mt-4" data-aos="zoom-out" data-aos-duration="1000">{longTitle}</h1>
+            <Prose desc={ pageDescriptive ? pageDescriptive : '<div>No data</div>'}/>
           </div>
         </div>
       </body>

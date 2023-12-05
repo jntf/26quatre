@@ -21,8 +21,19 @@ async function fetchServices() {
               url
             }
             shortDescription
-            description {
-              html
+            pageDescriptive {
+              introduction {
+                html
+              }
+              introImages {
+                url
+              }
+              corps {
+                html
+              }
+              conclusion {
+                html
+              }
             }
             firstPageColor {
               hex
