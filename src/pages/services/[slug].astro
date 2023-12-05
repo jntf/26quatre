@@ -1,10 +1,12 @@
 ---
-import Header from "../../components/common/Header.vue"
+import { Schema } from "astro-seo-schema";
+import Header from "../../components/common/Header.vue";
 import Footer from "../../components/common/Footer.astro";
 import Prose from "../../components/services/Prose.astro";
-import { Image } from 'astro:assets';
-import Logo from '../../assets/logo-26.quatre.webp';
-import { fetchServices } from '../../stores/servicesStore.js';
+import { Image } from "astro:assets";
+import Logo from "../../assets/logo150.webp";
+import LogoFooter from "../../assets/logo-26.quatre.webp";
+import { fetchServices } from "../../stores/servicesStore.js";
 
 interface Service {
   title: string;
@@ -13,13 +15,13 @@ interface Service {
   pageDescriptive: {
     introduction: {
       html: String;
-    }
+    };
     corps: {
       html: String;
-    }
+    };
     conclusion: {
       html: String;
-    }
+    };
   };
   image: {
     url: string;
@@ -32,7 +34,7 @@ export async function getStaticPaths() {
   return services.map(({ slug, title, longTitle, pageDescriptive, image }) => {
     return {
       params: { slug },
-      props: { title,longTitle,  pageDescriptive, image },
+      props: { title, longTitle, pageDescriptive, image },
     };
   });
 }
@@ -43,50 +45,93 @@ const dynamicImport = async (slug: String) => {
   if (slug) {
     return import(`../../assets/services/${slug}.webp`);
   } else {
-    return import('https://unsplash.com/fr/photos/un-chemin-enneige-dans-une-foret-enneigee-6HLFk334hYY');
+    return import(
+      "https://unsplash.com/fr/photos/un-chemin-enneige-dans-une-foret-enneigee-6HLFk334hYY"
+    );
   }
 };
 ---
+
 <html lang="fr">
-	<head>
-		<title>{ title }</title>
-		<meta name="viewport" content="width=device-width" />
-		<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-	</head>
-	<body>
-		<div
-			class="bg-gradient-to-br from-primary-800 via-primary-900 to-primary-950 min-h-screen"
-		>
-			<Header client:load logo={Logo} />
+  <head>
+    <title>{title}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <Schema
+      item={{
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name: "Data Analysis and Decision Optimization",
+        provider: {
+          "@type": "Organization",
+          name: "26quatre",
+          location: "Bayonne, Biarritz, Anglet, South-West France",
+        },
+        description:
+          "Expert data analysis services to transform raw data into valuable insights for business decision-making. Specializing in customer behavior analysis, market strategy development, and enhancing customer experiences.",
+        areaServed: ["Biarritz", "Bayonne", "Anglet"],
+        serviceType: "Data Analysis",
+        offers: {
+          "@type": "Offer",
+          description:
+            "Comprehensive data analysis for informed business decisions, tailored to local businesses and startups in South-West France.",
+        },
+      }}
+    />
+  </head>
+  <body>
+    <div
+      class="bg-gradient-to-br from-primary-800 via-primary-900 to-primary-950 min-h-screen"
+    >
+      <Header client:load logo={Logo} />
       <body>
         <div class="bg-white min-h-screen">
           <!-- image picture -->
           <div class="w-full md:h-[80vh]">
             <Image
-                src={(await dynamicImport(slug)).default}
-                alt="image"
-                class="w-full h-[80vh] md:h-[90vh] object-cover"
-                widths={[320, 480, 768, 1200]}
-                sizes="(max-width: 768px) 100vw, 1200px"
-                decoding="async"
-                loading="eager"
-                format="webp"
-                data-aos="zoom-in" data-aos-duration="1000"
+              src={(await dynamicImport(slug)).default}
+              alt="image"
+              class="w-full h-[30vh] md:h-[80vh] object-cover"
+              widths={[320, 480, 768, 1200]}
+              sizes="(max-width: 768px) 100vw, 1200px"
+              decoding="async"
+              loading="eager"
+              format="webp"
+              data-aos="zoom-in"
+              data-aos-duration="1000"
             />
           </div>
-          <div class="max-w-7xl mx-auto bg-white py-12 px-12 lg:px-24 md:-mt-32 relative z-10 rounded-md shadow-md">
-            <h1 class="font-display text-center text-2xl md:text-3xl text-gray-900 mt-4" data-aos="zoom-out" data-aos-duration="1000">{longTitle}</h1>
-            <Prose desc={ pageDescriptive ? pageDescriptive : '<div>No data</div>'}/>
+          <div
+            class="max-w-7xl mx-auto bg-white py-12 px-12 lg:px-24 md:-mt-32 relative z-10 xl:rounded-md shadow-md"
+          >
+            <h1
+              class="font-display text-center text-2xl md:text-3xl text-gray-900 mt-4"
+              data-aos="zoom-out"
+              data-aos-duration="1000"
+            >
+              {longTitle}
+            </h1>
+            <Prose
+              desc={pageDescriptive ? pageDescriptive : "<div>No data</div>"}
+            />
           </div>
         </div>
       </body>
-			<Footer services={services}>
-				<Image src={Logo} alt="Logo" width="240" height="60"/>
-			</Footer>
-		</div>
-		<script is:inline src="https://unpkg.com/aos@next/dist/aos.js"></script>
-		<script is:inline>
-			AOS.init();
-		</script>
-	</body>
+      <Footer services={services}>
+        <Image
+          src={LogoFooter}
+          alt="Logo"
+          widths={[320, 480, 768, 1200]}
+          sizes="(max-width: 768px) 100vw, 1200px"
+          decoding="async"
+          loading="lazy"
+          format="webp"
+        />
+      </Footer>
+    </div>
+    <script is:inline src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script is:inline>
+      AOS.init();
+    </script>
+  </body>
 </html>
