@@ -14,12 +14,12 @@ const address =  {
         <div class="mb-6 md:mb-0">
             <slot></slot>
         </div>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
                 <div class="mb-4 md:mb-0">
                     <h5 class="font-semibold text-lg mb-2">Services</h5>
                     <ul>
                         {serv.map((service: { slug: string, title: string }) => (
-                            <li class="text-sm">
+                            <li class="text-sm px-2 py-1">
                                 <a href={`/services/${service.slug}`} class="hover:text-primary-500">{ service.title }</a>
                             </li>
                         ))}
@@ -32,5 +32,8 @@ const address =  {
                 <p class="text-sm">{ address.country }</p>
             </div>
         </div>
+    </div>
+    <div class="flex items-center justify-center">
+        <a href="https://26quatre.com" class="text-primary-500 hover:text-primary-400">26quatre - 2023</a>
     </div>
 </footer>

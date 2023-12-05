@@ -65,20 +65,20 @@ const dynamicImport = async (slug: String) => {
       item={{
         "@context": "https://schema.org",
         "@type": "Service",
-        name: "Data Analysis and Decision Optimization",
+        name: "Analyse des données et optimisation des décisions",
         provider: {
           "@type": "Organization",
           name: "26quatre",
-          location: "Bayonne, Biarritz, Anglet, South-West France",
+          location: "Bayonne, Biarritz, Anglet, Sud-Ouest France, 64, 40, Landes et Pyrénées-Atlantiques, Nouvelle-Aquitaine",
         },
         description:
-          "Expert data analysis services to transform raw data into valuable insights for business decision-making. Specializing in customer behavior analysis, market strategy development, and enhancing customer experiences.",
+          "Services experts d'analyse de données pour transformer les données brutes en informations précieuses pour la prise de décision. Spécialisés dans l'analyse du comportement des clients, le développement de stratégies de marché et l'amélioration de l'expérience des clients.",
         areaServed: ["Biarritz", "Bayonne", "Anglet"],
-        serviceType: "Data Analysis",
+        serviceType: {title},
         offers: {
-          "@type": "Offer",
+          "@type": "Offre",
           description:
-            "Comprehensive data analysis for informed business decisions, tailored to local businesses and startups in South-West France.",
+            "Une analyse complète des données pour des décisions commerciales éclairées, adaptée aux entreprises locales et aux startups du Sud-Ouest de la France.",
         },
       }}
     />
