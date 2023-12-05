@@ -5,7 +5,8 @@ import Footer from "../components/common/Footer.astro";
 import HeroSection from "../components/common/HeroSectionWrapper.astro";
 import ServicesSection from "../components/ServicesSection.astro";
 import { Image } from 'astro:assets';
-import Logo from '../assets/logo-26.quatre.webp';
+import Logo from '../assets/logo150.webp';
+import LogoFooter from '../assets/logo-26.quatre.webp';
 
 import { fetchServices } from '../stores/servicesStore.js';
 
@@ -26,7 +27,15 @@ const services = await fetchServices();
 			<HeroSection services={services}/>
 			<ServicesSection services={services}/>
 			<Footer services={services}>
-				<Image src={Logo} alt="Logo" width="240" height="60"/>
+				<Image 
+					src={LogoFooter} 
+					alt="Logo" 
+					widths={[320, 480, 768, 1200]}
+					sizes="(max-width: 768px) 100vw, 1200px"
+					decoding="async"
+					loading="eager"
+					format="webp"
+				/>
 			</Footer>
 		</div>
 		<script is:inline src="https://unpkg.com/aos@next/dist/aos.js"></script>
