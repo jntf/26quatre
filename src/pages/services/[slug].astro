@@ -1,4 +1,5 @@
 ---
+import { Seo } from "astro-seo-meta";
 import { Schema } from "astro-seo-schema";
 import Header from "../../components/common/Header.vue";
 import Footer from "../../components/common/Footer.astro";
@@ -12,6 +13,7 @@ interface Service {
   title: string;
   longTitle: string;
   slug: string;
+  shortDescription: string;
   pageDescriptive: {
     introduction: {
       html: String;
@@ -31,15 +33,15 @@ const services: Service[] = await fetchServices();
 
 export async function getStaticPaths() {
   const services: Service[] = await fetchServices().then((res) => res.services);
-  return services.map(({ slug, title, longTitle, pageDescriptive, image }) => {
+  return services.map(({ slug, title, longTitle, shortDescription, pageDescriptive, image }) => {
     return {
       params: { slug },
-      props: { title, longTitle, pageDescriptive, image },
+      props: { title, longTitle, shortDescription, pageDescriptive, image },
     };
   });
 }
 
-const { title, longTitle, pageDescriptive, image } = Astro.props;
+const { title, longTitle, shortDescription, pageDescriptive, image } = Astro.props;
 const { slug } = Astro.params;
 const dynamicImport = async (slug: String) => {
   if (slug) {
@@ -55,6 +57,10 @@ const dynamicImport = async (slug: String) => {
     <title>{title}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <Seo
+      title={title}
+      description={shortDescription}
+    />
     <Schema
       item={{
         "@context": "https://schema.org",
