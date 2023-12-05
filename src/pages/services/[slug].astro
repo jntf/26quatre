@@ -55,7 +55,18 @@ const { title, longTitle, pageDescriptive, image } = Astro.props;
         <div class="bg-white min-h-screen">
           <!-- image picture -->
           <div class="w-full md:h-[60vh]">
-            <img src={image ? image.url: 'https://unsplash.com/fr/photos/un-chemin-enneige-dans-une-foret-enneigee-6HLFk334hYY'} alt="image" class="w-full h-full object-cover" loading="lazy" />
+            <!-- <img src={image ? image.url: 'https://unsplash.com/fr/photos/un-chemin-enneige-dans-une-foret-enneigee-6HLFk334hYY'} alt="image" class="w-full h-full object-cover" loading="lazy" /> -->
+            <Image
+                src={image ? image.url: 'https://unsplash.com/fr/photos/un-chemin-enneige-dans-une-foret-enneigee-6HLFk334hYY'}
+                alt="image"
+                class="w-full h-[80vh] md:h-[90vh] object-cover"
+                width="1200"
+                height="600"
+                sizes="(max-width: 768px) 100vw, 1200px"
+                decoding="async"
+                loading="eager"
+                format="webp"
+            />
           </div>
           <div class="max-w-7xl mx-auto bg-white py-12 px-12 lg:px-24 md:-mt-32 relative z-10 rounded-md shadow-md">
             <h1 class="font-display text-center text-2xl md:text-3xl text-gray-900 mt-4" data-aos="zoom-out" data-aos-duration="1000">{longTitle}</h1>
