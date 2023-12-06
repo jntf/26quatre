@@ -36,7 +36,7 @@ const services = await fetchServices();
 	</head>
 	<body>
 		<div
-			class="bg-gradient-to-br from-primary-800 via-primary-900 to-primary-950 min-h-screen"
+			class="full bg-gradient-to-br from-primary-800 via-primary-900 to-primary-950 min-h-screen"
 		>
 			<Header client:load logo={Logo} />
 			<HeroSection services={services} />
@@ -59,3 +59,9 @@ const services = await fetchServices();
 		</script>
 	</body>
 </html>
+
+<style>
+.full {
+	overflow-x: hidden;
+}
+</style>
