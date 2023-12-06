@@ -1,14 +1,14 @@
 ---
 // Importez votre composant Vue
-import Header from "../components/common/Header.vue"
+import Header from "../components/common/Header.vue";
 import Footer from "../components/common/Footer.astro";
 import HeroSection from "../components/common/HeroSectionWrapper.astro";
 import ServicesSection from "../components/ServicesSection.astro";
-import { Image } from 'astro:assets';
-import Logo from '../assets/logo150.webp';
-import LogoFooter from '../assets/logo-26.quatre.webp';
+import { Image } from "astro:assets";
+import Logo from "../assets/logo150.webp";
+import LogoFooter from "../assets/logo-26.quatre.webp";
 
-import { fetchServices } from '../stores/servicesStore.js';
+import { fetchServices } from "../stores/servicesStore.js";
 
 const services = await fetchServices();
 ---
@@ -24,12 +24,12 @@ const services = await fetchServices();
 			class="bg-gradient-to-br from-primary-800 via-primary-900 to-primary-950 min-h-screen"
 		>
 			<Header client:load logo={Logo} />
-			<HeroSection services={services}/>
-			<ServicesSection services={services}/>
+			<HeroSection services={services} />
+			<ServicesSection services={services} />
 			<Footer services={services}>
-				<Image 
-					src={LogoFooter} 
-					alt="Logo" 
+				<Image
+					src={LogoFooter}
+					alt="Logo"
 					widths={[320, 480, 768, 1200]}
 					sizes="(max-width: 768px) 100vw, 1200px"
 					decoding="async"
