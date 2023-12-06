@@ -28,23 +28,60 @@ interface Service {
   image: {
     url: string;
   };
+  seo: {
+    title: string;
+    description: string;
+    keywords: [string];
+  };
+  seoJsonLd: {
+    description: string;
+    aeraServed: [string];
+    location: string;
+    name: string;
+    offersDescription: string;
+    serviceType: string;
+  };
 }
 const services: Service[] = await fetchServices();
 
 export async function getStaticPaths() {
   const services: Service[] = await fetchServices().then((res) => res.services);
   return services.map(
-    ({ slug, title, longTitle, shortDescription, pageDescriptive, image }) => {
+    ({
+      slug,
+      title,
+      longTitle,
+      shortDescription,
+      pageDescriptive,
+      image,
+      seo,
+      seoJsonLd,
+    }) => {
       return {
         params: { slug },
-        props: { title, longTitle, shortDescription, pageDescriptive, image },
+        props: {
+          title,
+          longTitle,
+          shortDescription,
+          pageDescriptive,
+          image,
+          seo,
+          seoJsonLd,
+        },
       };
     },
   );
 }
 
-const { title, longTitle, shortDescription, pageDescriptive, image } =
-  Astro.props;
+const {
+  title,
+  longTitle,
+  shortDescription,
+  pageDescriptive,
+  image,
+  seo,
+  seoJsonLd,
+} = Astro.props;
 const { slug } = Astro.params;
 const dynamicImport = async (slug: String) => {
   if (slug) {
@@ -57,71 +94,79 @@ const dynamicImport = async (slug: String) => {
 
 <html lang="fr">
   <head>
-    <title>{title}</title>
+    <title>{longTitle}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <Seo title={title} description={shortDescription} />
+    <!-- Tags SEO -->
+    <Seo
+      title={seo ? seo.title : ""}
+      description={seo ? seo.description : ""}
+      keywords={seo ? seo.keywords : []}
+    />
+    <!-- Json LD -->
     <Schema
       item={{
         "@context": "https://schema.org",
         "@type": "Service",
-        name: "Analyse des données et optimisation des décisions",
+        name: seoJsonLd ? seoJsonLd.name : "",
+        description: seoJsonLd ? seoJsonLd.description : "",
         provider: {
           "@type": "Organization",
-          name: "26quatre",
-          location:
-            "Bayonne, Biarritz, Anglet, Sud-Ouest France, 64, 40, Landes et Pyrénées-Atlantiques, Nouvelle-Aquitaine",
+          name: seoJsonLd ? seoJsonLd.name : "",
+          location: seoJsonLd ? seoJsonLd.location : "",
         },
-        description:
-          "Services experts d'analyse de données pour transformer les données brutes en informations précieuses pour la prise de décision. Spécialisés dans l'analyse du comportement des clients, le développement de stratégies de marché et l'amélioration de l'expérience des clients.",
-        areaServed: ["Biarritz", "Bayonne", "Anglet"],
-        serviceType: "Analyse des données",
+        areaServed: seoJsonLd ? seoJsonLd.aeraServed : [],
+        serviceType: seoJsonLd ? seoJsonLd.serviceType : "",
         offers: {
           "@type": "Offer",
-          description:
-            "Une analyse complète des données pour des décisions commerciales éclairées, adaptée aux entreprises locales et aux startups du Sud-Ouest de la France.",
+          description: seoJsonLd ? seoJsonLd.offersDescription : "",
         },
       }}
     />
   </head>
-  <body>
+  <body itemscope itemtype="https://schema.org/Service">
     <div
       class="bg-gradient-to-br from-primary-800 via-primary-900 to-primary-950 min-h-screen"
     >
       <Header client:load logo={Logo} />
-      <body>
-        <div class="bg-white min-h-screen">
-          <!-- image picture -->
-          <div class="w-full md:h-[80vh]">
-            <Image
-              src={(await dynamicImport(slug)).default}
-              alt="image"
-              class="w-full h-[30vh] md:h-[80vh] object-cover"
-              widths={[320, 480, 768, 1200]}
-              sizes="(max-width: 768px) 100vw, 1200px"
-              decoding="async"
-              loading="eager"
-              format="webp"
-              data-aos="zoom-in"
-              data-aos-duration="1000"
-            />
-          </div>
-          <div
-            class="max-w-7xl mx-auto bg-white py-12 px-12 lg:px-24 md:-mt-32 relative z-10 xl:rounded-md shadow-md"
-          >
-            <h1
-              class="font-display text-center text-2xl md:text-3xl text-gray-900 mt-4"
-              data-aos="zoom-out"
-              data-aos-duration="1000"
-            >
-              {longTitle}
-            </h1>
-            <Prose
-              desc={pageDescriptive ? pageDescriptive : "<div>No data</div>"}
-            />
-          </div>
+      <div class="bg-white min-h-screen">
+        <!-- Image principale -->
+        <div
+          class="w-full md:h-[80vh]"
+          itemprop="image"
+          itemscope
+          itemtype="https://schema.org/ImageObject"
+        >
+          <Image
+            src={(await dynamicImport(slug)).default}
+            alt="image principale du service"
+            class="w-full h-[30vh] md:h-[80vh] object-cover"
+            widths={[320, 480, 768, 1200]}
+            sizes="(max-width: 768px) 100vw, 1200px"
+            decoding="async"
+            loading="eager"
+            format="webp"
+            data-aos="zoom-in"
+            data-aos-duration="1000"
+          />
         </div>
-      </body>
+        <div
+          class="max-w-7xl mx-auto bg-white py-12 px-12 lg:px-24 md:-mt-32 relative z-10 xl:rounded-md shadow-md"
+        >
+          <!-- Titre pour SEO -->
+          <h1
+            class="font-display text-center text-2xl md:text-3xl text-gray-900 mt-4"
+            itemprop="name"
+          >
+            {longTitle}
+          </h1>
+          <!-- Description du service -->
+          <Prose
+            desc={pageDescriptive ? pageDescriptive : "<div>No data</div>"}
+            itemprop="description"
+          />
+        </div>
+      </div>
       <Footer services={services}>
         <Image
           src={LogoFooter}

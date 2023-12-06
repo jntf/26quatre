@@ -38,6 +38,21 @@ async function fetchServices() {
             firstPageColor {
               hex
             }
+            seo {
+              ... on TagAndJsonLd {
+                keywords
+                title
+                description
+              }
+            }
+            seoJsonLd {
+              description
+              aeraServed
+              location
+              name
+              offersDescription
+              serviceType
+            }
           }
         }`,
     }),
