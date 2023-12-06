@@ -18,6 +18,21 @@ const services = await fetchServices();
 		<title>26quatre - Services Data</title>
 		<meta name="viewport" content="width=device-width" />
 		<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+		<!-- Google tag (gtag.js) -->
+		<script
+			type="text/partytown"
+			async
+			src="https://www.googletagmanager.com/gtag/js?id=G-J80BBZ98FZ"
+		></script>
+		<script type="text/partytown">
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+			gtag("js", new Date());
+
+			gtag("config", "G-J80BBZ98FZ");
+		</script>
 	</head>
 	<body>
 		<div
