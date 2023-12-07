@@ -16,7 +16,7 @@ const services = await fetchServices();
 <html lang="fr">
 	<head>
 		<title>26quatre - Services Data</title>
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 		<!-- Google tag (gtag.js) -->
 		<script
@@ -34,9 +34,9 @@ const services = await fetchServices();
 			gtag("config", "G-J80BBZ98FZ");
 		</script>
 	</head>
-	<body>
+	<body class="">
 		<div
-			class="full bg-gradient-to-br from-primary-800 via-primary-900 to-primary-950 min-h-screen"
+			class="bg-gradient-to-br from-primary-800 via-primary-900 to-primary-950 min-h-screen"
 		>
 			<Header client:load logo={Logo} />
 			<HeroSection services={services} />

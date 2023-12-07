@@ -72,3 +72,16 @@ const links: any = [
 ]
 </script>
 
+<style>
+.custom-shadow {
+    box-shadow: -10px -10px 5px #fff, 10px 10px 5px #000;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    /* Pour s'assurer qu'il reste au-dessus des autres éléments */
+}
+</style>
+
