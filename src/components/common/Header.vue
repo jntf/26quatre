@@ -1,38 +1,28 @@
 <template>
-    <header :class="{ 'bg-white text-primary-800 shadow-2xl': scrolled, 'text-primary-200': !scrolled }">
-        <nav class="px-4 lg:px-6 sticky top-0 z-50">
-            <div class="py-1 flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-                <!-- logo -->
+    <header :class="{ 'bg-white text-primary-800 shadow-xl': scrolled, 'text-primary-200': !scrolled }">
+        <nav class="flex justify-between items-center p-4 lg:px-6 sticky top-0 z-50 max-w-screen-xl mx-auto">
+            <!-- Logo -->
+            <a href="/" class="flex items-center">
                 <img :class="{ 'invert': scrolled }" :src="logo.src" alt="<26·quatre />" width="150" height="150" loading="lazy">
-                <!-- Mobile -->
-                <div class="flex items-center lg:order-2">
-                    <button data-collapse-toggle="mobile-menu-2" type="button"
-                        class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                        aria-controls="mobile-menu-2" aria-expanded="false">
-                        <span class="sr-only">Open main menu</span>
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                        <svg class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </button>
+            </a>
+
+            <!-- Bouton menu mobile -->
+            <button @click="toggleMenu" class="lg:hidden" aria-label="Open menu">
+                <svg :class="{ 'text-gray-800': scrolled, 'text-gray-100': !scrolled }" width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+
+             <!-- Liens de navigation -->
+             <div :class="{ 'hidden': !isMenuOpen, 'flex': isMenuOpen, 'fixed inset-0 bg-white z-50': isMenuOpen }" class="lg:flex items-center space-x-6">
+                <a href="#" class="hover:text-yellow-400">Accueil</a>
+                <div @mouseover="openDropdown" @mouseleave="closeDropdown" class="relative">
+                    <a href="#services" class="hover:text-yellow-400">Services</a>
+                    <div v-if="isDropdownOpen" class="absolute bg-white shadow-md -ml-16">
+                        <a v-for="item in titlesSlug" :href="`/services/${item.slug}`" class="block px-4 text-sm py-2 hover:bg-gray-100">{{ item.title }}</a>
+                    </div>
                 </div>
-                <!-- Links -->
-                <div class="hidden justify-end items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
-                    <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
-                        <li v-for="link in links" :key="link.name" class="relative">
-                            <a :href="'/' + link.url" class="px-3 py-2 flex items-center justify-center hover:text-yellow-400">
-                                {{ link.name }}
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                <!-- Autres liens ici -->
             </div>
         </nav>
     </header>
@@ -43,11 +33,25 @@ import { ref, onMounted, onUnmounted } from 'vue';
 
 const props = defineProps({
     logo: Object,
+    titlesSlug: Array,
 })
 
 const scrolled = ref(false);
+const isMenuOpen = ref(false);
+const isDropdownOpen = ref(false);
 
-// Fonction pour vérifier le scroll
+const toggleMenu = () => {
+    isMenuOpen.value = !isMenuOpen.value;
+};
+
+const openDropdown = () => {
+    isDropdownOpen.value = true;
+};
+
+const closeDropdown = () => {
+    isDropdownOpen.value = false;
+};
+
 const checkScroll = () => {
     scrolled.value = window.scrollY > 0;
 };
@@ -59,17 +63,6 @@ onMounted(() => {
 onUnmounted(() => {
     window.removeEventListener('scroll', checkScroll);
 });
-
-const links: any = [
-    {
-        name: 'Accueil',
-        url: '#'
-    },
-    {
-        name: 'Services',
-        url: '#services'
-    },
-]
 </script>
 
 <style>

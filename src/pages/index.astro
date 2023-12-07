@@ -10,7 +10,13 @@ import LogoFooter from "../assets/logo-26.quatre.webp";
 
 import { fetchServices } from "../stores/servicesStore.js";
 
-const services = await fetchServices();
+interface Service {
+  title: string;
+}
+const services:[Service] = await fetchServices();
+const titlesSlug: Object = services.services.map((serv: Object) => {
+  return { title: serv.title, slug: serv.slug };
+});
 ---
 
 <html lang="fr">
@@ -38,7 +44,7 @@ const services = await fetchServices();
 		<div
 			class="bg-gradient-to-br from-primary-800 via-primary-900 to-primary-950 min-h-screen"
 		>
-			<Header client:load logo={Logo} />
+			<Header client:load logo={Logo} titlesSlug={titlesSlug} />
 			<HeroSection services={services} />
 			<ServicesSection services={services} />
 			<Footer services={services}>

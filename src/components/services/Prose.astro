@@ -7,58 +7,22 @@ const myImageWidth = 400; // Exemple de largeur d'image
 <div class="mt-6">
     <hr class="mx-6 md:mx-20 lg:mx-36 my-8">
     <!-- Intro -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center mb-12">
-        <div class="flex justify-center">
-            <Image src={props.desc.introImages ? props.desc.introImages.url : ""} 
-                class="rounded-lg max-w-xs md:max-w-sm lg:max-w-md hidden md:block" 
-                alt="test" 
-                width="400" height="400"
-                widths={[320, 480, 768, 1200]}
-                sizes="(max-width: 768px) 100vw, 1200px"
-                decoding="async"
-                loading="lazy"
-                format="webp"    
-            />
-        </div>
-        <div class="prose prose-sm sm:prose lg:prose-lg prose-blue">
+    <div class="items-center mb-12">
+        <div class="prose prose-sm sm:prose lg:prose-lg">
             <div set:html={props.desc.introduction ? props.desc.introduction.html: "<h2>No Data</h2>"}></div>
         </div>
     </div>
     <hr class="mx-6 md:mx-20 lg:mx-36 my-8">
     <!-- Corps -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-28 items-center mb-12">
-        <div class="prose prose-sm sm:prose lg:prose-lg prose-blue order-2 md:order-1">
-            <div set:html={props.desc.corps ? props.desc.corps.html: "<h2 class='text-black'>No Data</h2>"}></div>
-        </div>
-        <div class="flex justify-center order-1 md:order-2">
-            <Image src={props.desc.introImages ? props.desc.introImages.url : ""} 
-                class="rounded-lg max-w-xs md:max-w-sm lg:max-w-md hidden md:block" 
-                alt="test" 
-                width="400" height="400"
-                widths={[320, 480, 768, 1200]}
-                sizes="(max-width: 768px) 100vw, 1200px"
-                decoding="async"
-                loading="lazy"
-                format="webp"    
-            />
+    <div class="items-center mb-12">
+        <div class="prose prose-sm sm:prose lg:prose-lg">
+            <div set:html={props.desc.corps ? props.desc.corps.html: "<h2 class='text-black'>No Data</h2>"} class="mx-auto"></div>
         </div>
     </div>
     <hr class="mx-6 md:mx-20 lg:mx-36 my-8">
     <!-- Conclusion -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-28 items-center mb-12">
-        <div class="flex justify-center">
-            <Image src={props.desc.introImages ? props.desc.introImages.url : ""} 
-                class="rounded-lg max-w-xs md:max-w-sm lg:max-w-md hidden md:block" 
-                alt="test" 
-                width="400" height="400"
-                widths={[320, 480, 768, 1200]}
-                sizes="(max-width: 768px) 100vw, 1200px"
-                decoding="async"
-                loading="lazy"
-                format="webp"    
-            />
-        </div>
-        <div class="prose prose-sm sm:prose lg:prose-lg prose-blue">
+    <div class="items-center mb-12">
+        <div class="prose prose-sm sm:prose lg:prose-lg">
             <div set:html={props.desc.conclusion ? props.desc.conclusion.html: "<h2>No Data</h2>"}></div>
         </div>
     </div>
